@@ -127,9 +127,8 @@ exports.twitterCheck = (req, res) => {
     twitterRegex.test(req.params.username) &&
     req.params.username.length <= 15
   ) {
-    fetch("https://twitter.com/" + req.params.username)
+    fetch("https://mobile.twitter.com/" + req.params.username)
       .then((response) => {
-        console.log(response);
         if (response.status === 404) {
           return res.json({ success: "Username Available" });
         } else {
