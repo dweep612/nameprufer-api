@@ -143,6 +143,8 @@ exports.twitterCheck = (req, res) => {
   }
 };
 
+// Hacktoberfest
+
 exports.youtubeCheck = (req, res) => {
   var youtubeRegex = /^[a-zA-Z0-9]*$\w{0,38}/g;
 
@@ -197,6 +199,29 @@ exports.behanceCheck = (req, res) => {
     req.params.username.length <= 15
   ) {
     fetch("https://www.behance.net/" + req.params.username)
+      .then((response) => {
+        if (response.status === 404) {
+          return res.json({ success: "Username Available" });
+        } else {
+          return res.json({ error: "Username Taken" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    return res.status(406).json({ error: "Invalid Username" });
+  }
+};
+
+exports.slideshareCheck = (req, res) => {
+  var sliceshareRegex = /^[a-zA-Z0-9]*$\w{0,38}/g;
+
+  if (
+    sliceshareRegex.test(req.params.username) &&
+    req.params.username.length <= 15
+  ) {
+    fetch("https://www.slideshare.net/" + req.params.username)
       .then((response) => {
         if (response.status === 404) {
           return res.json({ success: "Username Available" });
