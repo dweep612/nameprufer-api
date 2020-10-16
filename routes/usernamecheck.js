@@ -9,7 +9,8 @@ const {
   instagramCheck,
   twitterCheck,
   youtubeCheck,
-  redditCheck
+  redditCheck,
+  behanceCheck
 } = require("../controllers/usernamecheck");
 
 // Repo Hosting Services
@@ -25,5 +26,6 @@ router.get("/twitter/:username", twitterCheck);
 // Other Websites
 router.get("/youtube/:username", youtubeCheck);
 router.get("/reddit/:username", redditCheck);
+router.get("/behance/:username", behanceCheck);
 
 module.exports = router;

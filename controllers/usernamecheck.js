@@ -188,3 +188,26 @@ exports.redditCheck = (req, res) => {
     return res.status(406).json({ error: "Invalid Username" });
   }
 };
+
+exports.behanceCheck = (req, res) => {
+  var behanceRegex = /^[a-zA-Z0-9]*$\w{0,38}/g;
+
+  if (
+    behanceRegex.test(req.params.username) &&
+    req.params.username.length <= 15
+  ) {
+    fetch("https://www.behance.net/" + req.params.username)
+      .then((response) => {
+        if (response.status === 404) {
+          return res.json({ success: "Username Available" });
+        } else {
+          return res.json({ error: "Username Taken" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    return res.status(406).json({ error: "Invalid Username" });
+  }
+};
